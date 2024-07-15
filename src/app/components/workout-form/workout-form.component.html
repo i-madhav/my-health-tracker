@@ -1,0 +1,21 @@
+   <div class="h-screen bg-slate-400 flex items-center justify-center">
+        <div class="bg-white px-2 py-8 space-y-4 w-1/3 flex flex-col rounded-lg">
+            <div class=" bg-slate-400 w-fit p-4 space-x-3 rounded-lg">
+                <label for="username">Username:</label>
+                <input type="text" id="username" [(ngModel)]="username">
+            </div>
+
+            <div  class=" bg-slate-400 w-fit p-4 space-x-3 rounded-lg">
+                <label for="workoutType">Workout Type:</label>
+                <select id="workoutType" [(ngModel)]="workoutType">
+                  <option *ngFor="let type of workoutTypes" [value]="type">{{ type }}</option>
+                </select>
+            </div>
+     
+            <div  class=" bg-slate-400 w-fit  p-4 space-x-3 rounded-lg">
+                <label for="minutes">Workout Minutes:</label>
+                <input type="number" id="minutes" [(ngModel)]="minutes">
+            </div>
+          <button (click)="addWorkout()" class="w-fit rounded-xl p-2 font-semibold text-blue-500 shadow-2xl border border-black">Add Workout</button>
+        </div>
+      </div>

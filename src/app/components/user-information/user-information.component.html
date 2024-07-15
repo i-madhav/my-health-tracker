@@ -1,0 +1,64 @@
+<div class="h-screen bg-slate-400 flex flex-col items-center justify-center">
+  <!-- Search Input and Filter Options -->
+  <div class="flex items-center mb-4">
+    <input type="text" [(ngModel)]="searchQuery" (input)="applyFilters()" placeholder="Search..." class="p-2 rounded-md border border-gray-400">
+    
+    <select [(ngModel)]="filterType" (change)="applyFilters()" class="p-2 ml-2 rounded-md border border-gray-400">
+      <option value="">All</option>
+      <option value="name">Name</option>
+      <option value="workoutType">Workout Type</option>
+      <option value="workoutMinutes">Workout Minutes</option>
+    </select>
+  </div>
+
+  <!-- User Data Table -->
+  <div class="user-list">
+    <ng-container *ngIf="paginatedUserData.length > 0; else noData">
+      <table class="shadow-2xl bg-white border border-black">
+        <thead class="border-b border-black">
+          <tr>
+            <th class="px-10">Name</th>
+            <th class="px-10">Workout Type(s)</th>
+            <th class="px-10">Workout Minutes</th>
+            <th class="px-10">Workout Count</th>
+            <th class="px-10">Total Minutes</th>
+          </tr>
+        </thead>
+        <tbody class="border-b border-black">
+          <tr *ngFor="let user of paginatedUserData" class="border-b border-black">
+            <td class="px-10">{{ user.name }}</td>
+            <td class="px-14">
+              <ul>
+                <li *ngFor="let workout of user.workouts">{{ workout.type }}</li>
+              </ul>
+            </td>
+            <td class="px-20">
+              <ul>
+                <li *ngFor="let workout of user.workouts">{{ workout.minutes }}</li>
+              </ul>
+            </td>
+            <td class="px-20">{{ user.workouts.length }}</td>
+            <td class="px-20">{{ getTotalWorkoutMinutes(user.workouts) }}</td>
+          </tr>
+        </tbody>
+      </table>
+      
+      <!-- Pagination Controls -->
+      <div class="pagination-controls mt-4 flex justify-center items-center">
+        <button (click)="previousPage()" [disabled]="currentPage === 1" class="px-4 py-2 bg-blue-500 text-white rounded-md mr-2">Previous</button>
+        <span>Page {{ currentPage }} of {{ totalPages }}</span>
+        <button (click)="nextPage()" [disabled]="currentPage === totalPages" class="px-4 py-2 bg-blue-500 text-white rounded-md ml-2">Next</button>
+      </div>
+
+      <!-- Graph Button -->
+       <div class=" mt-6">
+        <button class=" bg-blue-500 rounded-lg text-white font-semibold p-5" (click)="goToGraph()" >Go to graph</button>
+       </div>
+    </ng-container>
+    <ng-template #noData>
+      <div class="no-data-message">
+        No matching users found.
+      </div>
+    </ng-template>
+  </div>
+</div>

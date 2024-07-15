@@ -1,0 +1,15 @@
+<div class="flex">
+    <div class="w-1/4 p-4">
+      <h2 class="text-xl font-bold mb-4">Users</h2>
+      <p-listbox [options]="users" optionLabel="name" (onChange)="onUserSelect($event)"></p-listbox>
+    </div>
+    <div class="w-3/4 p-4">
+      <h2 class="text-xl font-bold mb-4">Workout Graph</h2>
+      @if (selectedUser) {
+        <h3 class="text-lg font-semibold mb-2">{{ selectedUser.name }}'s Workouts</h3>
+        <p-chart type="bar" [data]="chartData" [options]="chartOptions"></p-chart>
+      } @else {
+        <p>Please select a user to view their workout graph.</p>
+      }
+    </div>
+  </div>
