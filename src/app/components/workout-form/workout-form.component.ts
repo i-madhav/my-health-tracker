@@ -24,6 +24,7 @@ export class WorkoutTrackerComponent {
   ) {}
 
   addWorkout() {
+    if(!this.username || this.workoutType || this.minutes) alert("Fields are empty");
     this.workoutService.addWorkout(this.username, this.workoutType, this.minutes);
     this.username = '';
     this.workoutType = 'Running';

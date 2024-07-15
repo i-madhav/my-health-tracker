@@ -4,14 +4,14 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ChartModule } from 'primeng/chart';
 import { ListboxModule } from 'primeng/listbox';
+
 @Component({
   selector: 'app-user-graph',
   standalone: true,
   imports: [CommonModule, FormsModule, ChartModule, ListboxModule],
   templateUrl: './user-graph.component.html',
-  styleUrl: './user-graph.component.css'
+  styleUrls: ['./user-graph.component.css']
 })
-
 export class UserWorkoutGraphComponent implements OnInit {
   users: any[] = [];
   selectedUser: any;
